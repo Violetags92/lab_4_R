@@ -57,9 +57,6 @@ print <- function(formula, data){
   return(t(lin$bhat()))
 }
 
-library(ggplot2)
-
-
 resid <- function(formula, data){
   lin <- linreg$new(formula, data)
   return(lin$resid())
