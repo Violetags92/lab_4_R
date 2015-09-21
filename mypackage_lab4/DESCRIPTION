@@ -8,5 +8,7 @@ Maintainer: Violeta <vioga273@student.liu.se>
 Description: Implement the calculations using ordinary linear algebra, Implement the results as an RC class object
 License: GPL-2 | GPL-3
 LazyData: true
-Suggests: testthat
+Suggests: testthat,
+    knitr
 Depends: R (>= 2.10)
+VignetteBuilder: knitr
