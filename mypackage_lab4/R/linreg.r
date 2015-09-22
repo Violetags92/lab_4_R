@@ -1,9 +1,9 @@
-#' Calculate a function for a multiple regression model
+ #' Calculate a function for a multiple regression model
 #' @param formula formula.
 #' @param data data.frame.
 #' @return A linreg object.
 #' \usage{print(formula, data)
-#'        plot(formula, data)
+#'        plot(formula, data) 
 #'        resid(formula, data)
 #'        pred(formula, data)
 #'        coef(formula, data)
@@ -20,12 +20,12 @@ linreg <- setRefClass("linreg",
                       fields = list(formula = "formula", data = "data.frame"),
                       methods = list(
                         initialize = function(formula, data){
-                          formula <<- y~x
-                          data <<- iris
-                          X <<- model.matrix(formula, data)
-                          y <<- as.matrix(data[all.vars(formula)[1]])
-                          n <<- length(X)
-                          p <<- length(y)
+                          .self$formula <- y~x
+                          .self$data <- iris
+                          .self$X <- model.matrix(formula, data)
+                          .self$y <- as.matrix(data[all.vars(formula)[1]])
+                          .self$n <- length(X)
+                          .self$p <- length(y)
                         },
                         bhat = function(){ 
                           return(solve(t(X)%*%X) %*% t(X) %*% y)
