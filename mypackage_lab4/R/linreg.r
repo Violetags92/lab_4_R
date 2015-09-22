@@ -1,4 +1,4 @@
- #' Calculate a function for a multiple regression model
+#' Calculate a function for a multiple regression model
 #' @param formula formula.
 #' @param data data.frame.
 #' @return A linreg object.
@@ -17,42 +17,38 @@
 #'           coef(Petal.Length~Species, data = iris)
 #'          }
 linreg <- setRefClass("linreg",
-                      fields = list(formula = "formula", data = "data.frame"),
+                      fields=list(formula="formula", 
+                                  data = "data.frame", 
+                                  #X = "matrix",
+                                  #y = "matrix",
+                                  bhat = "matrix"
+                                  resid = "matrix",
+                                  yhat = "matrix",
+                                  df = "integer",
+                                  rv1 = "integer",
+                                  varcoeff = "matrix",
+                                  tstat = "matrix",
+                                  pv = "matrix"),
                       methods = list(
                         initialize = function(formula, data){
-                          .self$formula <- y~x
-                          .self$data <- iris
-                          .self$X <- model.matrix(formula, data)
-                          .self$y <- as.matrix(data[all.vars(formula)[1]])
-                          .self$n <- length(X)
-                          .self$p <- length(y)
+                          .self$formula <- formula
+                          .self$data <- data
+                          X <- model.matrix(formula, data)
+                          #formulanames <- all.vars(formula)
+                          y <- as.matrix(data[all.vars(formula)[1]])#data[,which(names(data) == formulanames[1])]
+                          .self$bhat <-  solve(t(X) %*% X) %*% t(X) %*% y
+                          .self$yhat <- X %*% .self$bhat
+                          .self$resid <- y - .self$yhat
+                          .self$df <- length(data)-length(X) #dim(data)[1]-dim(X)[2]
+                          .self$rv1 <- (t(.self$resid)%*%.self$resid)/.self$df
+                          .self$varcoeff <-(.self$rv1)*solve(t(X)%*%X)#as.numeric(.self$rv1)*solve(t(X)%*%X)
+                          .self$tstat <- .self$bhat / sqrt(.self$varcoeff)#.self$bhat / sqrt(diag(.self$varcoeff))
+                          .self$pv <- pt(.self$bhat, .self$df)
                         },
-                        bhat = function(){ 
-                          return(solve(t(X)%*%X) %*% t(X) %*% y)
-                        },
-                        yhat = function() {
-                          return(X%*%bhat())
-                        },
-                        resid = function(){
-                          return(y - yhat())
-                        },
-                        df = function() {
-                          return(n-p)
-                        },
-                        rv1 = function() {
-                          return((t(resid())%*%resid())/df())
-                        },
-                        varcoeff = function() {
-                          return(as.numeric(rv1())*solve(t(X)%*%X))
-                        },
-                        tstat = function() {
-                          return(bhat() / sqrt(abs(varcoeff()[1,])))
-                        },
-                        pv = function() {
-                          return(pt(bhat(),df()))
-                        }
-                      )
-)
+                        
+
+                          
+  )
 
 print <- function(formula, data){
   lin <- linreg$new(formula, data)
