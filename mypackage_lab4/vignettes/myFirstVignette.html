@@ -58,12 +58,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </div>
 
 
-<p>Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The <code>html_vignette</code> output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The <code>html_vignette</code> format:</p>
-<ul>
-<li>Never uses retina figures</li>
-<li>Has a smaller default figure size</li>
-<li>Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style</li>
-</ul>
+<p>library(mypackage)</p>
+<p>This package contains a function to handle linear regression models using ordinary least squares. It takes a formula and a data.frame, and it has differents methods implemented:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(Petal.Length~Species, <span class="dt">data =</span> iris)</code></pre>
+<pre><code>## Petal.Length ~ Species</code></pre>
 <div id="vignette-info" class="section level2">
 <h2>Vignette Info</h2>
 <p>Note the various macros within the <code>vignette</code> section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the <code>title</code> field and the <code>\VignetteIndexEntry</code> to match the title of your vignette.</p>

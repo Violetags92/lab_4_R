@@ -12,7 +12,6 @@
 }
 \value{
 A linreg object.
-\url{}
 \usage{print(formula, data)
        plot(formula, data)
        resid(formula, data)
@@ -26,8 +25,11 @@ Calculate a function for a multiple regression model
 }
 \examples{
 {print(Petal.Length~Species, data = iris)
+          plot(Petal.Length~Species, data = iris)
           head(resid(Petal.Length~Species, data = iris))
           summary(Petal.Length~Species, data = iris)
+          pred(Petal.Length~Species, data = iris)
+          coef(Petal.Length~Species, data = iris)
          }
 }
 

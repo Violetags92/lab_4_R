@@ -9,9 +9,25 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+library(mypackage)
+
+
+```{r}
+
+
+```
+
+
 This package contains a function to handle linear regression models using
-ordinary least squares.
-It has differents methos implemented: 
+ordinary least squares. 
+It takes a formula and a data.frame, and it has differents methods 
+implemented: 
+
+
+```{r}
+print(Petal.Length~Species, data = iris)
+```
+
 
 
 
