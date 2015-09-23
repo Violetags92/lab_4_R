@@ -5,7 +5,7 @@ Version: 1.0
 Date: 2015-09-21
 Author: Yixuan xu & Violeta García Sáez
 Maintainer: Violeta <vioga273@student.liu.se>
-Description: Implement the calculations using ordinary linear algebra, Implement the results as an RC class object
+Description: Implement the calculations using ordinary linear algebra, implement the results as an RC class object.
 License: GPL-2 | GPL-3
 LazyData: true
 Suggests: testthat,
