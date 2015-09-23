@@ -54,7 +54,6 @@ linreg <- setRefClass("linreg",
                           z <- data.frame( .self$resid,  .self$yhat, sq_resid)
                           colnames(z) <- c("a1", "a2", "a3")
                           p <- ggplot(z, aes(a2, a1))  + geom_point(pch = 1, size = 4) +
-                            geom_smooth(linetype = 3, colour = "black", method = "lm",se = FALSE)+
                             geom_smooth(linetype = 1, colour = "black", method = "loess",se = FALSE)+theme_bw()
                           p <- p +  xlab("Fitted values") +
                             ylab("Residuals") +
