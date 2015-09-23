@@ -12,7 +12,7 @@
 #'@examples {
 #'lin1 <- linreg(formula = Petal.Length ~ Species, data = iris)
 #'  lin1$print()
-#'           
+#'  lin1$plot()           
 #'}
 linreg <- setRefClass("linreg",
                       fields=list(formula="formula", 
@@ -68,6 +68,10 @@ linreg <- setRefClass("linreg",
                             ylab(label = expression(paste(sqrt("|Standardized residuals|")))) +
                             ggtitle(label = "Scale-Location")
                            return(grid.arrange(p, g, nrow = 2))
+                        },
+                        
+                        coeff = function(){
+                          return(c(.self$bhat[1],.self$bhat[2], .self$bhat[3]))
                         },
                         
                         resid = function(){
