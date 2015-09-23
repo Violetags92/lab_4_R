@@ -1,19 +1,20 @@
 #' Calculate a function for a multiple regression model
-#' @field formula formula.
-#' @field data data.frame.
-#' @method {
-#'        print()
-#'        plot() 
-#'        resid()
-#'        pred()
-#'        coef()
-#'        summary()
+#' @param formula formula.
+#' @param data data.frame.
+#' @return A linreg object.
+#' \usage{print(formula, data)
+#'        plot(formula, data) 
+#'        resid(formula, data)
+#'        pred(formula, data)
+#'        coef(formula, data)
+#'        summary(formula, data)
 #'        }
-#'@return A linreg object.
-#'@examples 
+#'@examples {
 #'lin1 <- linreg(formula = Petal.Length ~ Species, data = iris)
 #'  lin1$print()
-#'  lin1$plot()           
+#'  lin1$plot()  
+#'  lin1$summary()         
+#'}
 linreg <- setRefClass("linreg",
                       fields=list(formula="formula", 
                                   data = "data.frame", 
@@ -21,7 +22,7 @@ linreg <- setRefClass("linreg",
                                   resid = "matrix",
                                   yhat = "matrix",
                                   df = "integer",
-                                  rv1 = "integer",
+                                  rv1 = "numeric",
                                   varcoeff = "matrix",
                                   tstat = "matrix",
                                   pv = "matrix"),
@@ -35,11 +36,11 @@ linreg <- setRefClass("linreg",
                           .self$bhat <-  solve(t(X) %*% X) %*% t(X) %*% y
                           .self$yhat <- X %*% .self$bhat
                           .self$resid <- y - .self$yhat
-                          .self$df <- nrow(data)-ncol(X) 
-                          .self$rv1 <- as.integer((t(.self$resid)%*%.self$resid)/.self$df)
-                          .self$varcoeff <-(.self$rv1)*solve(t(X)%*%X)
+                          .self$df <- dim(.self$data)[1]-dim(.self$data)[2]
+                          .self$rv1 <- sum((t(.self$resid) %*% (.self$resid)))/.self$df
+                          .self$varcoeff <-.self$rv1*(solve(t(X)%*%X))
                           .self$tstat <- .self$bhat / sqrt(diag(.self$varcoeff))
-                          .self$pv <- pt(.self$bhat, .self$df)
+                          .self$pv <-  2*(1-pt(.self$bhat, .self$df))
                         },
                         
                         print = function(){
@@ -48,9 +49,7 @@ linreg <- setRefClass("linreg",
                           writeLines(c("lm(formula =", f1[2],f1[1],f1[3], ",data=iris)"), sep=" ")
                           writeLines("\n")
                           writeLines("Coefficients:")
-                          ppp <- t(.self$bhat)
-                          rownames(ppp) <- c("")
-                          ppp
+                          t(.self$bhat)
                         },
                         
                         plot = function(){
@@ -73,30 +72,30 @@ linreg <- setRefClass("linreg",
                         },
                         
                         coeff = function(){
+                          writeLines("Coefficientes:")
                           return(c(.self$bhat[1],.self$bhat[2], .self$bhat[3]))
                         },
                         
-                        resid = function(){
+                        residual = function(){
+                          writeLines("Residuals:")
                           return(.self$resid)
                         },
                         
                         pred = function(){
+                          writeLines("Predicted values:")
                           return(.self$yhat)
                         },
                         
                         summary = function(){
-                          summ <- list( bhat=.self$bhat,
-                                        resid=.self$resid,
-                                        varcoef=.self$varcoeff,
-                                        tstat=.self$tstat,
-                                        pv=.self$pv,
-                                        rv1=.self$rv1,
-                                        df=.self$df)
+                          writeLines("Call:")
+                          writeLines(c("linreg(formula=", as.character(.self$formula)[2], as.character(.self$formula)[1], as.character(.self$formula)[3], ",data=iris)", .self$data$name), sep=" ")
+                          writeLines("\n")
+                          sum <- data.frame(.self$bhat, sqrt(diag(.self$varcoeff)), .self$tstat, .self$pv)                         
+                          names(sum) <- c("Estimate", "SE", "t-value", "p-value") 
+                          summ<-list(Coefficients=sum,
+                                     ResidualVariance=.self$rv1, 
+                                     DegreesOfFreedom=.self$df)
                           return(summ)
-                        },
-                        a = function(){
-                          z <- data.frame(.self$resid, .self$yhat)
-                          return(z[,1])
                         }
                       )
 )
