@@ -48,7 +48,9 @@ linreg <- setRefClass("linreg",
                           writeLines(c("lm(formula =", f1[2],f1[1],f1[3], ",data=iris)"), sep=" ")
                           writeLines("\n")
                           writeLines("Coefficients:")
-                          t(.self$bhat)
+                          ppp <- t(.self$bhat)
+                          rownames(ppp) <- c("")
+                          ppp
                         },
                         
                         plot = function(){
