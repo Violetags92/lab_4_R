@@ -9,13 +9,11 @@
 #'        coef(formula, data)
 #'        summary(formula, data)
 #'        }
-#'@examples {print(Petal.Length~Species, data = iris)
-#'           plot(Petal.Length~Species, data = iris)
-#'           head(resid(Petal.Length~Species, data = iris))
-#'           summary(Petal.Length~Species, data = iris)
-#'           pred(Petal.Length~Species, data = iris)
-#'           coef(Petal.Length~Species, data = iris)
-#'          }
+#'@examples {
+#'lin1 <- linreg(formula = Petal.Length ~ Species, data = iris)
+#'  lin1$print()
+#'           
+#'}
 linreg <- setRefClass("linreg",
                       fields=list(formula="formula", 
                                   data = "data.frame", 
@@ -33,19 +31,24 @@ linreg <- setRefClass("linreg",
                           .self$formula <- formula
                           .self$data <- data
                           X <- model.matrix(formula, data)
-                          y <- as.matrix(data[all.vars(formula)[1]])#data[,which(names(data) == formulanames[1])]
+                          y <- as.matrix(data[all.vars(formula)[1]])
                           .self$bhat <-  solve(t(X) %*% X) %*% t(X) %*% y
                           .self$yhat <- X %*% .self$bhat
                           .self$resid <- y - .self$yhat
-                          .self$df <- nrow(data)-ncol(X) #dim(data)[1]-dim(X)[2]
+                          .self$df <- nrow(data)-ncol(X) 
                           .self$rv1 <- as.integer((t(.self$resid)%*%.self$resid)/.self$df)
-                          .self$varcoeff <-(.self$rv1)*solve(t(X)%*%X)#as.numeric(.self$rv1)*solve(t(X)%*%X)
-                          .self$tstat <- .self$bhat / sqrt(diag(.self$varcoeff))#.self$bhat / sqrt(diag(.self$varcoeff))
+                          .self$varcoeff <-(.self$rv1)*solve(t(X)%*%X)
+                          .self$tstat <- .self$bhat / sqrt(diag(.self$varcoeff))
                           .self$pv <- pt(.self$bhat, .self$df)
                         },
                         
                         print = function(){
-                          return(.self$bhat)
+                          writeLines("Call:")
+                          f1 <- as.character(.self$formula)
+                          writeLines(c("lm(formula =", f1[2],f1[1],f1[3], ",data=iris)"), sep=" ")
+                          writeLines("\n")
+                          writeLines("Coefficients:")
+                          t(.self$bhat)
                         },
                         
                         plot = function(){
