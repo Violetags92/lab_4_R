@@ -2,19 +2,16 @@
 #' @param formula formula.
 #' @param data data.frame.
 #' @return A linreg object.
-#' \usage{print(formula, data)
-#'        plot(formula, data) 
-#'        resid(formula, data)
-#'        pred(formula, data)
-#'        coef(formula, data)
-#'        summary(formula, data)
-#'        }
-#'@examples {
-#'lin1 <- linreg(formula = Petal.Length ~ Species, data = iris)
-#'  lin1$print()
-#'  lin1$plot()  
-#'  lin1$summary()         
-#'}
+#' @method linreg$print()
+#' @method linreg$plot()
+#' @method linreg$resid()
+#' @method linreg$pred()
+#' @method linreg$coef()
+#' @method linreg$summary()
+#' @examples 
+#' lin1 <- linreg(formula = Petal.Length ~ Species, data = iris)
+#' lin1$print()
+#' lin1$summary()  
 linreg <- setRefClass("linreg",
                       fields=list(formula="formula", 
                                   data = "data.frame", 
