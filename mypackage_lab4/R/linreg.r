@@ -1,19 +1,19 @@
 #' Calculate a function for a multiple regression model
-#' @param formula formula.
-#' @param data data.frame.
-#' @return A linreg object.
-#' \usage{print(formula, data)
-#'        plot(formula, data) 
-#'        resid(formula, data)
-#'        pred(formula, data)
-#'        coef(formula, data)
-#'        summary(formula, data)
+#' @field formula formula.
+#' @field data data.frame.
+#' @method {
+#'        print()
+#'        plot() 
+#'        resid()
+#'        pred()
+#'        coef()
+#'        summary()
 #'        }
-#'@examples {
+#'@return A linreg object.
+#'@examples 
 #'lin1 <- linreg(formula = Petal.Length ~ Species, data = iris)
 #'  lin1$print()
 #'  lin1$plot()           
-#'}
 linreg <- setRefClass("linreg",
                       fields=list(formula="formula", 
                                   data = "data.frame", 
@@ -67,7 +67,7 @@ linreg <- setRefClass("linreg",
                           g <- g +  xlab("Fitted values") +
                             ylab(label = expression(paste(sqrt("|Standardized residuals|")))) +
                             ggtitle(label = "Scale-Location")
-                           return(grid.arrange(p, g, nrow = 2))
+                          return(grid.arrange(p, g, nrow = 2))
                         },
                         
                         coeff = function(){

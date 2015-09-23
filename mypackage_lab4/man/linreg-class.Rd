@@ -5,31 +5,22 @@
 \alias{linreg}
 \alias{linreg-class}
 \title{Calculate a function for a multiple regression model}
-\arguments{
-\item{formula}{formula.}
-
-\item{data}{data.frame.}
-}
 \value{
 A linreg object.
-\usage{print(formula, data)
-       plot(formula, data)
-       resid(formula, data)
-       pred(formula, data)
-       coef(formula, data)
-       summary(formula, data)
-       }
 }
 \description{
 Calculate a function for a multiple regression model
 }
+\section{Fields}{
+
+\describe{
+\item{\code{formula}}{formula.}
+
+\item{\code{data}}{data.frame.}
+}}
 \examples{
-{print(Petal.Length~Species, data = iris)
-          plot(Petal.Length~Species, data = iris)
-          head(resid(Petal.Length~Species, data = iris))
-          summary(Petal.Length~Species, data = iris)
-          pred(Petal.Length~Species, data = iris)
-          coef(Petal.Length~Species, data = iris)
-         }
+lin1 <- linreg(formula = Petal.Length ~ Species, data = iris)
+ lin1$print()
+ lin1$plot()
 }
 
