@@ -35,6 +35,7 @@ plot(): should plot the following two plots of residuals Vs fitted Values.
 We need install the libraries ggplot2 and gridExtra.
 ```{r}
 library(ggplot2)
+library(grid)
 library(gridExtra)
 lin1$plot()
 ```
