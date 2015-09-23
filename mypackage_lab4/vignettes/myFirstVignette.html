@@ -10,9 +10,9 @@
 
 <meta name="author" content="Violeta&amp;Yixuan" />
 
-<meta name="date" content="2015-09-22" />
+<meta name="date" content="2015-09-23" />
 
-<title>Lab_4</title>
+<title>mypackage</title>
 
 
 
@@ -52,213 +52,374 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 
 <div id="header">
-<h1 class="title">Lab_4</h1>
+<h1 class="title">mypackage</h1>
 <h4 class="author"><em>Violeta&amp;Yixuan</em></h4>
-<h4 class="date"><em>2015-09-22</em></h4>
+<h4 class="date"><em>2015-09-23</em></h4>
 </div>
 
 
-<p>library(mypackage)</p>
-<p>This package contains a function to handle linear regression models using ordinary least squares. It takes a formula and a data.frame, and it has differents methods implemented:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(Petal.Length~Species, <span class="dt">data =</span> iris)</code></pre>
-<pre><code>## Petal.Length ~ Species</code></pre>
-<div id="vignette-info" class="section level2">
-<h2>Vignette Info</h2>
-<p>Note the various macros within the <code>vignette</code> section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the <code>title</code> field and the <code>\VignetteIndexEntry</code> to match the title of your vignette.</p>
-</div>
-<div id="styles" class="section level2">
-<h2>Styles</h2>
-<p>The <code>html_vignette</code> template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:</p>
-<pre><code>output: 
-  rmarkdown::html_vignette:
-    css: mystyles.css</code></pre>
-</div>
-<div id="figures" class="section level2">
-<h2>Figures</h2>
-<p>The figure sizes have been customised so that you can easily put two images side-by-side.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">1</span>:<span class="dv">10</span>)
-<span class="kw">plot</span>(<span class="dv">10</span>:<span class="dv">1</span>)</code></pre>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAWlBMVEUAAAAAADoAAGYAOjoAOpAAZrY6AAA6ADo6AGY6kNtmAABmADpmZmZmtrZmtv+QOgCQZgCQkGaQ2/+2ZgC2/7a2///bkDrb/9vb////tmb/25D//7b//9v////Y4K3VAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAGlUlEQVR4nO2dDXebNhRASZZ0i7fVXWhZqe3//zdnEM7HbHTBCFDie89JTpsoT/a1eBLwgOIgUYq1X0DuKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEFAYkHFh2EtQWnDzUDnRkE9FG++Bv9B4v5zpjh9X1jQ+E17JdYSNFe45CiIMAcRzmLDUBCgIEBBgIIABXX0rV0VFOhd8iiopXjz/dJvBodIhoKWDTcVBRHmIMJZ7EoUBCgIUBAwk6CyKB7322Pi+5okXHKGHxSfR1D18PPo6PFw2G2eEoRLzohjqbMI2m+PWuq750NQNTVccvqXhX1tUzY8NOPmuGXV9z8Op++vUbI47bO6IEcQ8ZKDWlWTwyVn7RzkLDadW18HLR1uPhQEKAhQEHAbgiYsTG9C0Kgylgt/m7bhKuEG9HVljwoa9McpG64SbkBfCop3tlgOavewjrw/jDFfv0lYcBarim73vC569tMT97s2IwW9OXzRd6Qncb9rM1JQe6wwUE/ayD6rIEcQNaxOh8DiOag8Dq9fX4qiPew6qd8rSHrEe/QsttuEWSw6flo/vz+/2ySv7Hc8Uyb1y9HSNjx0Z8PKx+afyx+0n7Qs7AuXsuEhjJsuWy1/2ucjCGpHT+UI6me3uf/x5uTY1HDjWDUHnVI07mzUoc3j5H6vYNVZbL+duBM2tt+1uWJntXdUzNLv2ozPQXXv2dJZ+l2bmzgeNAUFAZ9A0LzFRh9fUNplz8Xw4xqeyg6rPI4HJV4498RP2XDhcAoaFEhB8UhZ5aCF+x0QKqdZbPDOarJ+18adVcCdVcCdVWDWJP3rS6/L6wUtfBnDTAftMZVPKiZYvnYmZcOG7qziDCNo7nVhT4cpG7bsNs3ZjHNBk0/7fBZBh0N59+wIilIVT3Mk6c+Rg1p+ffnNWSzKftu/ZHIdtGy4+VAQoCBAQUDugla/b3DmgpZe9Vx+BWkbpgy3+Lq57yWkbJgynIIGtVJQvJk5KNrOWSxzFAQoCFAQMJOg6nRnnL4qop5wq+fkM+YRVN09H3ab5hTsOEHrz+pnzCIoXMiy3z78HCcog3XhGTOdOAyHWsuHn9WYq31uRtDLhZvloyPoIictu824U8+3koNeL23tLSe68Vls8XDzoSBAQYCCgFUF5ZeSz1lTUIaT+jkrCspxWXiOggAFAeYgwFkMcB0ErCbow7CSoAndcJMkQca+YwWlbX4tCprejYImN1HQEkEUlKDJhObXoqDp3dy2oI+LggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCwgqH2uEj8xqIw/8aR5nAfcRezlOoDeGH+0lZV15MEgZ8wvaL89vpqK3tzxVUcF1cffhiL/XprrAKI3GmtuyX8IN+TvvSn/GfMLCveKoVvE7jZRQaFEOxok3Kau7HdYh/tmhVCRdu9ZKgfRR1Y9fIsJap8HE4cE1cVT+zSQYR/YC0sJKuMv6CggmoPq++8bSmS4iYXHpQTXgx+CtZAgeK5bM+yjgqpm66B7PWLyba2EsTw4CS0jqIYc3T7IPirojj/28Oiq2AeRrSB6LmA76uOCWjWRe4MNyi25bmIVrYKqriSl/+2H9xNN1QNGRqZJuhp2E9ToCAqXqkU/9vDGo03qLKf5eFp4Jb6SbrLUmwcNXgwwLAdlt1Dsth98RbCrUfP+SklNuuFV5bWr8cFREKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgID9BZ3UFwwsN5kBBgIKALAXtNn9vQr1ZU6nyTyOoCqUtTWHYbjOs4CgNmQpqivOPX01NVF10/2mKo5oaqipeSJSYTAU9tSV1oaqu7H7Q1j/V99//XHSLy1TQ17Ys8aVkLqSh1leJV32kJWtB1Yug1zLYeC19erIW9L8R1LDf/jW0gDcNWQvqSpq7H7RUD//Ga11Tk7Wg7vqUbhYL2frr8CL5JOQt6P066CimbMull0zT+QnKDAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQcB/NqcfBF4zHjcAAAAASUVORK5CYII=" /> <img src="data:image/png;base64,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" /></p>
-<p>You can enable figure captions by <code>fig_caption: yes</code> in YAML:</p>
-<pre><code>output:
-  rmarkdown::html_vignette:
-    fig_caption: yes</code></pre>
-<p>Then you can use the chunk option <code>fig.cap = &quot;Your figure caption.&quot;</code> in <strong>knitr</strong>.</p>
-</div>
-<div id="more-examples" class="section level2">
-<h2>More Examples</h2>
-<p>You can write math expressions, e.g. <span class="math">\(Y = X\beta + \epsilon\)</span>, footnotes<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>, and tables, e.g. using <code>knitr::kable()</code>.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="right">mpg</th>
-<th align="right">cyl</th>
-<th align="right">disp</th>
-<th align="right">hp</th>
-<th align="right">drat</th>
-<th align="right">wt</th>
-<th align="right">qsec</th>
-<th align="right">vs</th>
-<th align="right">am</th>
-<th align="right">gear</th>
-<th align="right">carb</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Mazda RX4</td>
-<td align="right">21.0</td>
-<td align="right">6</td>
-<td align="right">160.0</td>
-<td align="right">110</td>
-<td align="right">3.90</td>
-<td align="right">2.620</td>
-<td align="right">16.46</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">4</td>
-</tr>
-<tr class="even">
-<td align="left">Mazda RX4 Wag</td>
-<td align="right">21.0</td>
-<td align="right">6</td>
-<td align="right">160.0</td>
-<td align="right">110</td>
-<td align="right">3.90</td>
-<td align="right">2.875</td>
-<td align="right">17.02</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">4</td>
-</tr>
-<tr class="odd">
-<td align="left">Datsun 710</td>
-<td align="right">22.8</td>
-<td align="right">4</td>
-<td align="right">108.0</td>
-<td align="right">93</td>
-<td align="right">3.85</td>
-<td align="right">2.320</td>
-<td align="right">18.61</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">1</td>
-</tr>
-<tr class="even">
-<td align="left">Hornet 4 Drive</td>
-<td align="right">21.4</td>
-<td align="right">6</td>
-<td align="right">258.0</td>
-<td align="right">110</td>
-<td align="right">3.08</td>
-<td align="right">3.215</td>
-<td align="right">19.44</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="left">Hornet Sportabout</td>
-<td align="right">18.7</td>
-<td align="right">8</td>
-<td align="right">360.0</td>
-<td align="right">175</td>
-<td align="right">3.15</td>
-<td align="right">3.440</td>
-<td align="right">17.02</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="left">Valiant</td>
-<td align="right">18.1</td>
-<td align="right">6</td>
-<td align="right">225.0</td>
-<td align="right">105</td>
-<td align="right">2.76</td>
-<td align="right">3.460</td>
-<td align="right">20.22</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="left">Duster 360</td>
-<td align="right">14.3</td>
-<td align="right">8</td>
-<td align="right">360.0</td>
-<td align="right">245</td>
-<td align="right">3.21</td>
-<td align="right">3.570</td>
-<td align="right">15.84</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">4</td>
-</tr>
-<tr class="even">
-<td align="left">Merc 240D</td>
-<td align="right">24.4</td>
-<td align="right">4</td>
-<td align="right">146.7</td>
-<td align="right">62</td>
-<td align="right">3.69</td>
-<td align="right">3.190</td>
-<td align="right">20.00</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td align="left">Merc 230</td>
-<td align="right">22.8</td>
-<td align="right">4</td>
-<td align="right">140.8</td>
-<td align="right">95</td>
-<td align="right">3.92</td>
-<td align="right">3.150</td>
-<td align="right">22.90</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="left">Merc 280</td>
-<td align="right">19.2</td>
-<td align="right">6</td>
-<td align="right">167.6</td>
-<td align="right">123</td>
-<td align="right">3.92</td>
-<td align="right">3.440</td>
-<td align="right">18.30</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">4</td>
-</tr>
-</tbody>
-</table>
-<p>Also a quote using <code>&gt;</code>:</p>
-<blockquote>
-<p>“He who gives up [code] safety for [code] speed deserves neither.” (<a href="https://twitter.com/hadleywickham/status/504368538874703872">via</a>)</p>
-</blockquote>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>A footnote here.<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
+<p>This package contains the function linreg that creates a linear regression using ordinary least squares. This function takes a formula and a data.frame and returns and linreg object.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mypackage)</code></pre>
+<p>For example, we take the iris data.frame and the formula PetalLength~Species, and create our linreg object:</p>
+<pre class="sourceCode r"><code class="sourceCode r">lin1 &lt;-<span class="st"> </span><span class="kw">linreg</span>(<span class="dt">formula =</span> Petal.Length ~<span class="st"> </span>Species, <span class="dt">data =</span> iris)</code></pre>
+<p>The linreg function contains differents methods implemented:</p>
+<p>print(): we should have the printout as call of the regressions coefficients.</p>
+<pre class="sourceCode r"><code class="sourceCode r">lin1$<span class="kw">print</span>()</code></pre>
+<pre><code>## Call:
+## lm(formula = Petal.Length ~ Species ,data=iris) 
+## 
+## Coefficients:</code></pre>
+<pre><code>##              (Intercept) Speciesversicolor Speciesvirginica
+## Petal.Length       1.462             2.798             4.09</code></pre>
+<p>plot(): should plot the following two plots of residuals Vs fitted Values. We need install the libraries ggplot2 and gridExtra.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(gridExtra)</code></pre>
+<pre><code>## Warning: package 'gridExtra' was built under R version 3.1.3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">lin1$<span class="kw">plot</span>()</code></pre>
+<pre><code>## Warning in simpleLoess(y, x, w, span, degree, parametric, drop.square,
+## normalize, : pseudoinverse used at 1.4416</code></pre>
+<pre><code>## Warning in simpleLoess(y, x, w, span, degree, parametric, drop.square,
+## normalize, : neighborhood radius 4.1105</code></pre>
+<pre><code>## Warning in simpleLoess(y, x, w, span, degree, parametric, drop.square,
+## normalize, : reciprocal condition number 4.802e-016</code></pre>
+<pre><code>## Warning in simpleLoess(y, x, w, span, degree, parametric, drop.square,
+## normalize, : There are other near singularities as well. 16.896</code></pre>
+<pre><code>## Warning in simpleLoess(y, x, w, span, degree, parametric, drop.square,
+## normalize, : pseudoinverse used at 1.4416</code></pre>
+<pre><code>## Warning in simpleLoess(y, x, w, span, degree, parametric, drop.square,
+## normalize, : neighborhood radius 4.1105</code></pre>
+<pre><code>## Warning in simpleLoess(y, x, w, span, degree, parametric, drop.square,
+## normalize, : reciprocal condition number 4.802e-016</code></pre>
+<pre><code>## Warning in simpleLoess(y, x, w, span, degree, parametric, drop.square,
+## normalize, : There are other near singularities as well. 16.896</code></pre>
+<p><img src="data:image/png;base64,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" /></p>
+<p>coeff(): should return the regressions coefficients</p>
+<pre class="sourceCode r"><code class="sourceCode r">lin1$<span class="kw">coeff</span>()</code></pre>
+<pre><code>## Coefficientes:</code></pre>
+<pre><code>## [1] 1.462 2.798 4.090</code></pre>
+<p>residual(): should return the vector of residuals e of the regression</p>
+<pre class="sourceCode r"><code class="sourceCode r">lin1$<span class="kw">residual</span>()</code></pre>
+<pre><code>## Residuals:</code></pre>
+<pre><code>##        Petal.Length
+##   [1,]       -0.062
+##   [2,]       -0.062
+##   [3,]       -0.162
+##   [4,]        0.038
+##   [5,]       -0.062
+##   [6,]        0.238
+##   [7,]       -0.062
+##   [8,]        0.038
+##   [9,]       -0.062
+##  [10,]        0.038
+##  [11,]        0.038
+##  [12,]        0.138
+##  [13,]       -0.062
+##  [14,]       -0.362
+##  [15,]       -0.262
+##  [16,]        0.038
+##  [17,]       -0.162
+##  [18,]       -0.062
+##  [19,]        0.238
+##  [20,]        0.038
+##  [21,]        0.238
+##  [22,]        0.038
+##  [23,]       -0.462
+##  [24,]        0.238
+##  [25,]        0.438
+##  [26,]        0.138
+##  [27,]        0.138
+##  [28,]        0.038
+##  [29,]       -0.062
+##  [30,]        0.138
+##  [31,]        0.138
+##  [32,]        0.038
+##  [33,]        0.038
+##  [34,]       -0.062
+##  [35,]        0.038
+##  [36,]       -0.262
+##  [37,]       -0.162
+##  [38,]       -0.062
+##  [39,]       -0.162
+##  [40,]        0.038
+##  [41,]       -0.162
+##  [42,]       -0.162
+##  [43,]       -0.162
+##  [44,]        0.138
+##  [45,]        0.438
+##  [46,]       -0.062
+##  [47,]        0.138
+##  [48,]       -0.062
+##  [49,]        0.038
+##  [50,]       -0.062
+##  [51,]        0.440
+##  [52,]        0.240
+##  [53,]        0.640
+##  [54,]       -0.260
+##  [55,]        0.340
+##  [56,]        0.240
+##  [57,]        0.440
+##  [58,]       -0.960
+##  [59,]        0.340
+##  [60,]       -0.360
+##  [61,]       -0.760
+##  [62,]       -0.060
+##  [63,]       -0.260
+##  [64,]        0.440
+##  [65,]       -0.660
+##  [66,]        0.140
+##  [67,]        0.240
+##  [68,]       -0.160
+##  [69,]        0.240
+##  [70,]       -0.360
+##  [71,]        0.540
+##  [72,]       -0.260
+##  [73,]        0.640
+##  [74,]        0.440
+##  [75,]        0.040
+##  [76,]        0.140
+##  [77,]        0.540
+##  [78,]        0.740
+##  [79,]        0.240
+##  [80,]       -0.760
+##  [81,]       -0.460
+##  [82,]       -0.560
+##  [83,]       -0.360
+##  [84,]        0.840
+##  [85,]        0.240
+##  [86,]        0.240
+##  [87,]        0.440
+##  [88,]        0.140
+##  [89,]       -0.160
+##  [90,]       -0.260
+##  [91,]        0.140
+##  [92,]        0.340
+##  [93,]       -0.260
+##  [94,]       -0.960
+##  [95,]       -0.060
+##  [96,]       -0.060
+##  [97,]       -0.060
+##  [98,]        0.040
+##  [99,]       -1.260
+## [100,]       -0.160
+## [101,]        0.448
+## [102,]       -0.452
+## [103,]        0.348
+## [104,]        0.048
+## [105,]        0.248
+## [106,]        1.048
+## [107,]       -1.052
+## [108,]        0.748
+## [109,]        0.248
+## [110,]        0.548
+## [111,]       -0.452
+## [112,]       -0.252
+## [113,]       -0.052
+## [114,]       -0.552
+## [115,]       -0.452
+## [116,]       -0.252
+## [117,]       -0.052
+## [118,]        1.148
+## [119,]        1.348
+## [120,]       -0.552
+## [121,]        0.148
+## [122,]       -0.652
+## [123,]        1.148
+## [124,]       -0.652
+## [125,]        0.148
+## [126,]        0.448
+## [127,]       -0.752
+## [128,]       -0.652
+## [129,]        0.048
+## [130,]        0.248
+## [131,]        0.548
+## [132,]        0.848
+## [133,]        0.048
+## [134,]       -0.452
+## [135,]        0.048
+## [136,]        0.548
+## [137,]        0.048
+## [138,]       -0.052
+## [139,]       -0.752
+## [140,]       -0.152
+## [141,]        0.048
+## [142,]       -0.452
+## [143,]       -0.452
+## [144,]        0.348
+## [145,]        0.148
+## [146,]       -0.352
+## [147,]       -0.552
+## [148,]       -0.352
+## [149,]       -0.152
+## [150,]       -0.452</code></pre>
+<p>pred(): should return the predicted values of the regression</p>
+<pre class="sourceCode r"><code class="sourceCode r">lin1$<span class="kw">pred</span>()</code></pre>
+<pre><code>## Predicted values:</code></pre>
+<pre><code>##     Petal.Length
+## 1          1.462
+## 2          1.462
+## 3          1.462
+## 4          1.462
+## 5          1.462
+## 6          1.462
+## 7          1.462
+## 8          1.462
+## 9          1.462
+## 10         1.462
+## 11         1.462
+## 12         1.462
+## 13         1.462
+## 14         1.462
+## 15         1.462
+## 16         1.462
+## 17         1.462
+## 18         1.462
+## 19         1.462
+## 20         1.462
+## 21         1.462
+## 22         1.462
+## 23         1.462
+## 24         1.462
+## 25         1.462
+## 26         1.462
+## 27         1.462
+## 28         1.462
+## 29         1.462
+## 30         1.462
+## 31         1.462
+## 32         1.462
+## 33         1.462
+## 34         1.462
+## 35         1.462
+## 36         1.462
+## 37         1.462
+## 38         1.462
+## 39         1.462
+## 40         1.462
+## 41         1.462
+## 42         1.462
+## 43         1.462
+## 44         1.462
+## 45         1.462
+## 46         1.462
+## 47         1.462
+## 48         1.462
+## 49         1.462
+## 50         1.462
+## 51         4.260
+## 52         4.260
+## 53         4.260
+## 54         4.260
+## 55         4.260
+## 56         4.260
+## 57         4.260
+## 58         4.260
+## 59         4.260
+## 60         4.260
+## 61         4.260
+## 62         4.260
+## 63         4.260
+## 64         4.260
+## 65         4.260
+## 66         4.260
+## 67         4.260
+## 68         4.260
+## 69         4.260
+## 70         4.260
+## 71         4.260
+## 72         4.260
+## 73         4.260
+## 74         4.260
+## 75         4.260
+## 76         4.260
+## 77         4.260
+## 78         4.260
+## 79         4.260
+## 80         4.260
+## 81         4.260
+## 82         4.260
+## 83         4.260
+## 84         4.260
+## 85         4.260
+## 86         4.260
+## 87         4.260
+## 88         4.260
+## 89         4.260
+## 90         4.260
+## 91         4.260
+## 92         4.260
+## 93         4.260
+## 94         4.260
+## 95         4.260
+## 96         4.260
+## 97         4.260
+## 98         4.260
+## 99         4.260
+## 100        4.260
+## 101        5.552
+## 102        5.552
+## 103        5.552
+## 104        5.552
+## 105        5.552
+## 106        5.552
+## 107        5.552
+## 108        5.552
+## 109        5.552
+## 110        5.552
+## 111        5.552
+## 112        5.552
+## 113        5.552
+## 114        5.552
+## 115        5.552
+## 116        5.552
+## 117        5.552
+## 118        5.552
+## 119        5.552
+## 120        5.552
+## 121        5.552
+## 122        5.552
+## 123        5.552
+## 124        5.552
+## 125        5.552
+## 126        5.552
+## 127        5.552
+## 128        5.552
+## 129        5.552
+## 130        5.552
+## 131        5.552
+## 132        5.552
+## 133        5.552
+## 134        5.552
+## 135        5.552
+## 136        5.552
+## 137        5.552
+## 138        5.552
+## 139        5.552
+## 140        5.552
+## 141        5.552
+## 142        5.552
+## 143        5.552
+## 144        5.552
+## 145        5.552
+## 146        5.552
+## 147        5.552
+## 148        5.552
+## 149        5.552
+## 150        5.552</code></pre>
+<p>summary(): should return a summary of the linear regression similar as the printout for lm objects.</p>
+<pre class="sourceCode r"><code class="sourceCode r">lin1$<span class="kw">summary</span>()</code></pre>
+<pre><code>## Call:
+## linreg(formula= Petal.Length ~ Species ,data=iris)</code></pre>
+<pre><code>## $Coefficients
+##                   Estimate         SE  t-value      p-value
+## (Intercept)          1.462 0.06127676 23.85896 1.459051e-01
+## Speciesversicolor    2.798 0.08665843 32.28769 5.841238e-03
+## Speciesvirginica     4.090 0.08665843 47.19680 7.124461e-05
+## 
+## $ResidualVariance
+## [1] 0.1877421
+## 
+## $DegreesOfFreedom
+## [1] 145</code></pre>
 
 
 
