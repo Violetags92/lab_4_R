@@ -2,12 +2,16 @@
 #' @param formula formula.
 #' @param data data.frame.
 #' @return A linreg object.
-#' @method linreg$print()
-#' @method linreg$plot()
-#' @method linreg$resid()
-#' @method linreg$pred()
-#' @method linreg$coef()
-#' @method linreg$summary()
+#' @field formula A formula
+#' @field data A data.frame
+#' @field bhat A matrix
+#' @field resid A matrix
+#' @field yhat A matrix
+#' @field df A integer
+#' @field rv1 A integer
+#' @field varcoeff A matrix
+#' @field tstat A matrix
+#' @field pv A matrix
 #' @examples 
 #' lin1 <- linreg(formula = Petal.Length ~ Species, data = iris)
 #' lin1$print()
