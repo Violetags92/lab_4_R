@@ -12,23 +12,36 @@
 }
 \value{
 A linreg object.
-\usage{print(formula, data)
-       plot(formula, data)
-       resid(formula, data)
-       pred(formula, data)
-       coef(formula, data)
-       summary(formula, data)
-       }
 }
 \description{
 Calculate a function for a multiple regression model
 }
+\section{Fields}{
+
+\describe{
+\item{\code{formula}}{A formula}
+
+\item{\code{data}}{A data.frame}
+
+\item{\code{bhat}}{A matrix}
+
+\item{\code{resid}}{A matrix}
+
+\item{\code{yhat}}{A matrix}
+
+\item{\code{df}}{A integer}
+
+\item{\code{rv1}}{A integer}
+
+\item{\code{varcoeff}}{A matrix}
+
+\item{\code{tstat}}{A matrix}
+
+\item{\code{pv}}{A matrix}
+}}
 \examples{
-{
 lin1 <- linreg(formula = Petal.Length ~ Species, data = iris)
- lin1$print()
- lin1$plot()
- lin1$summary()
-}
+lin1$print()
+lin1$summary()
 }
 
