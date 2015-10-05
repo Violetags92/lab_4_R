@@ -30,18 +30,18 @@ linreg <- setRefClass("linreg",
                       
                       methods = list(
                         initialize = function(formula, data){
-                          .self$formula <- formula
+                        .self$formula <- formula
                           .self$data <- data
                           X <- model.matrix(formula, data)
                           y <- as.matrix(data[all.vars(formula)[1]])
                           .self$bhat <-  solve(t(X) %*% X) %*% t(X) %*% y
                           .self$yhat <- X %*% .self$bhat
                           .self$resid <- y - .self$yhat
-                          .self$df <- dim(.self$data)[1]-dim(.self$data)[2]
+                          .self$df <- dim(data)[1]-dim(X)[2]
                           .self$rv1 <- sum((t(.self$resid) %*% (.self$resid)))/.self$df
                           .self$varcoeff <-.self$rv1*(solve(t(X)%*%X))
                           .self$tstat <- .self$bhat / sqrt(diag(.self$varcoeff))
-                          .self$pv <-  2*(1-pt(.self$bhat, .self$df))
+                          .self$pv <-  2*(1-pt(.self$tstat, .self$df))
                         },
                         
                         print = function(){
